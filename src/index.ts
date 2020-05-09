@@ -74,7 +74,6 @@ class CommandActions implements Actions {
 
 
 function main() {
-  console.log(__dirname);
   const actions = new CommandActions();
   const [,, command] = process.argv;
   if (!command) {
