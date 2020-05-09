@@ -5,21 +5,10 @@ class Commands {
   static REMOVE = 'remove'; 
   static LIST = 'list'; 
   static HELP = 'help'; 
+  static CLEAN = 'clean';
 }
 
-interface Actions {
-  addTodo(title: string): void;
-  removeTodo(index: number): void;
-  listTodo(): void;
-  help(): void;
-}
-
-// type
-interface Todo {
-  title: string;
-}
-
-class CommandActions implements Actions {
+class CommandActions {
   private todos: string[];
   private fileName: string;
 
@@ -57,6 +46,11 @@ class CommandActions implements Actions {
     throw new Error("Not implemented");
   }
 
+  clean(): void {
+    this.todos = new Array<string>();
+    this.saveTodos();
+  }
+
   private saveTodos(): void {
     const todoStr = JSON.stringify(this.todos);
     fs.writeFileSync(this.fileName, todoStr);
@@ -83,7 +77,7 @@ function main() {
 
   switch (command) {
     case Commands.ADD: {
-      const title = getTodo(process.argv.slice(3));
+      const title = process.argv.slice(3).join(" ");
       actions.addTodo(title);
       break;
     }
@@ -100,18 +94,18 @@ function main() {
       actions.listTodo();
       break;
     }
+    case Commands.CLEAN: {
+      actions.clean();
+      break;
+    }
     case Commands.HELP: {
-      console.log("Help");
+      actions.help();
       break;
     }
     default:
       console.log("Please, type a valid argument");
       break;
   }
-}
-
-function getTodo(arg: string[]) {
-  return arg.join(" "); 
 }
 
 main();
