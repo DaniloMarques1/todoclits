@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "CommonJs",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "outDir": "./src/build/"
+  },
+  "include": [
+    "./src/**/*"
+  ]
+}

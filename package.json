@@ -1,0 +1,12 @@
+{
+  "name": "todocli",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./src/build/index.js"
+  },
+  "devDependencies": {
+    "@types/node": "^13.13.5"
+  }
+}
